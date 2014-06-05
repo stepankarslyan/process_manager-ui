@@ -19,22 +19,22 @@
       <form class="well">
         <div class="input-group input-group-sm">
           <span class="input-group-addon">@</span>
-          <input type="text" class="form-control" placeholder="Process id...">
+          <input type="text" ng-model="process.id" class="form-control" placeholder="Process id...">
         </div>
         <div class="input-group input-group-sm">
           <span class="input-group-addon">@</span>
-          <input type="text" class="form-control" placeholder="Process command...">
+          <input type="text" ng-model="process.cmd" class="form-control" placeholder="Process command...">
         </div>
         <div class="input-group input-group-sm">
           <span class="input-group-addon">@</span>
-          <input type="text" class="form-control" placeholder="Process name...">
+          <input type="text" ng-model="process.name" class="form-control" placeholder="Process name...">
         </div>
         <div class="input-group input-group-sm">
           <span class="input-group-addon">@</span>
-          <input type="text" class="form-control" placeholder="Process parameters...">
+          <input type="text" ng-model="process.params" class="form-control" placeholder="Process parameters...">
         </div>
         <div class="input-group input-group-sm">
-          <input ng-click="send()" type="button" class="btn btn-default" class="form-control" value="Send">
+          <input ng-click="save()" type="button" class="btn btn-default" class="form-control" value="Send">
         </div>
       </form>
       

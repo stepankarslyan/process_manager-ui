@@ -2,34 +2,33 @@ angular.module("MyApp").
   controller("ProcessController", function($scope) {
   
   $scope.process = {
-    id: Number,
+    id: "",
     name: "",
     cmd: "",
     params: ""
   };
   
-  $scope.process = [];
+  $scope.processes = [];
+
   
-  $scope.send = function() {
-    
-    $.ajax("/process", {
-      method: "GET",
-      dataType: "JSON",
+  $scope.save = function() {
+  
+    $.ajax({
+      url: "/processes",
+      method: "POST",
+      data: $scope.process,
       
-      success: function(serverResponse) {
-        var processes =   _.reject($scope.processes, function(process) {
-          return process == serverResponse;
-          processes.push(serverResponse);
-          $scope.processes = processes;
-        });
+      success: function() {
+        console.log("Post request succeded");
       },
       
       error: function() {
         console.log("Error happened");   
       }
-      
-    });
     
-  }
+    });
+     
+    
+  };
   
 });
