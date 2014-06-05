@@ -9,6 +9,38 @@
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
   </head>
   <body>
-    
+    <div class="container">
+      <h1>Processes</h1>
+      
+      <form class="well">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control" placeholder="Process id...">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control" placeholder="Process command...">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control" placeholder="Process name...">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control" placeholder="Process parameters...">
+        </div>
+        <div class="input-group input-group-sm">
+          <input type="button" class="btn btn-default" class="form-control" value="Send">
+        </div>
+      </form>
+      
+      <div>
+        <p>Process id:{{}}</p>
+        <p>Process name:{{}}</p>
+        <p>process command:{{}}</p>
+        <p>process parameters:{{}}</p>
+        <input type="button" class="btn btn-default" class="form-control" value="Delete">
+      </div>
+    </div>
   </body>
 </html>
