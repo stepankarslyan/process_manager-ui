@@ -1,14 +1,18 @@
 <!doctype html>
-<html>
+<html ng-app="MyApp">
   <head>
     <title>Process Manegement</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="lib/angular/angular.js"></script>
     <script src="lib/ui-bootstrap/src/buttons/buttons.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/underscore/underscore.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/processController.js"></script>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
   </head>
-  <body>
+  <body ng-controller="ProcessController">
     <div class="container">
       <h1>Processes</h1>
       
@@ -30,15 +34,15 @@
           <input type="text" class="form-control" placeholder="Process parameters...">
         </div>
         <div class="input-group input-group-sm">
-          <input type="button" class="btn btn-default" class="form-control" value="Send">
+          <input ng-click="send()" type="button" class="btn btn-default" class="form-control" value="Send">
         </div>
       </form>
       
-      <div>
-        <p>Process id:{{}}</p>
-        <p>Process name:{{}}</p>
-        <p>process command:{{}}</p>
-        <p>process parameters:{{}}</p>
+      <div ng-repeat="process in processes">
+        <p>Process id:{{process.id}}</p>
+        <p>Process name:{{process.name}}</p>
+        <p>process command:{{process.cmd}}</p>
+        <p>process parameters:{{process.params}}</p>
         <input type="button" class="btn btn-default" class="form-control" value="Delete">
       </div>
     </div>
