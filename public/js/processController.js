@@ -10,16 +10,32 @@ angular.module("MyApp").
   
   $scope.processes = [];
 
+  $.ajax({
+    url: "/processes",
+    method: "GET",
+    
+    success: function(data) {
+      console.log(data);
+      $scope.processes = data;
+      $scope.$apply();
+    }
+    
+  });
+
   
   $scope.save = function() {
+  
+    var process = $scope.process;
   
     $.ajax({
       url: "/processes",
       method: "POST",
-      data: $scope.process,
+      data: process,
       
-      success: function() {
+      success: function() {      
         console.log("Post request succeded");
+        $scope.processes.push(process);
+        $scope.$apply();
       },
       
       error: function() {
@@ -30,5 +46,5 @@ angular.module("MyApp").
      
     
   };
-  
+    
 });

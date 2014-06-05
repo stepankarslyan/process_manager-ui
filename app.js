@@ -11,3 +11,4 @@ app.use('/lib', express.static(__dirname + "/bower_components"));
 app.use(bodyParser());
 
 app.post("/processes", controller.save);
+app.get("/processes", controller.get);

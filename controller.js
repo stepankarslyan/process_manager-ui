@@ -18,6 +18,16 @@ module.exports = {
     console.log(req.body);
     var process =  new Process(req.body);
     process.save();   
+    res.send(200);
+  },
+  
+  get: function(request, response) {
+    
+    Process.find(function(err, processes) {
+      console.log(processes);
+      response.send(processes);
+    });
+
   }
 
 };

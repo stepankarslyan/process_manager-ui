@@ -35,14 +35,15 @@
         </div>
         <div class="input-group input-group-sm">
           <input ng-click="save()" type="button" class="btn btn-default" class="form-control" value="Send">
+          <input ng-click="get()" type="button" class="btn btn-default" class="form-control" value="GET">
         </div>
       </form>
       
-      <div ng-repeat="process in processes">
-        <p>Process id:{{process.id}}</p>
-        <p>Process name:{{process.name}}</p>
-        <p>process command:{{process.cmd}}</p>
-        <p>process parameters:{{process.params}}</p>
+      <div ng-repeat="proc in processes">
+        <p>Process id:{{proc.id}}</p>
+        <p>Process name:{{proc.name}}</p>
+        <p>process command:{{proc.cmd}}</p>
+        <p>process parameters:{{proc.params}}</p>
         <input type="button" class="btn btn-default" class="form-control" value="Delete">
       </div>
     </div>
