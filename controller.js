@@ -15,19 +15,58 @@ var Process = mongoose.model("Process", schema);
 module.exports = {
   
   save: function(req, res) {
-    console.log(req.body);
     var process =  new Process(req.body);
-    process.save();   
-    res.send(200);
+    
+    if (process.id == '') {
+      res.status(500);
+      res.send("Id should not be empty.");
+    }
+    else {
+      Process.find({id: process.id}, function(error, dbProcesses) {        
+        if (error) {
+          res.send(500);
+        }
+        else if (dbProcesses.length != 0) {
+          res.send(500);
+        }
+        else {
+          process.save(function(error) {
+            if (error) {
+              res.send(500);
+            }
+            else {
+              res.send(200);
+            }          
+          });
+        }      
+      });
+    }      
   },
+   
   
   get: function(request, response) {
     
     Process.find(function(err, processes) {
-      console.log(processes);
       response.send(processes);
     });
 
+  }, 
+  
+  delete: function(req, res) {
+    var processId = req.params.id;
+    //var id = JSON.stringify(req.params.id);
+    Process.findOneAndRemove({id: processId}, function(error, dbProcess) {
+
+      if(dbProcess) {
+        console.log(dbProcess + "is deleted from mongodb");
+        res.send(dbProcess);
+      }else{
+        console.log(error);
+      }
+      
+    });
+    
+   
   }
 
 };
