@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var _ = require("underscore");
 mongoose.connect("mongodb://localhost/test");
 console.log("Connection to mongodb established");
 
@@ -40,7 +41,7 @@ module.exports = {
           });
         }      
       });
-    }      
+    }   
   },
    
   

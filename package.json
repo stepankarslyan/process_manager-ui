@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "*",
     "mongoose": "*",
-    "body-parser": "*"
+    "body-parser": "*",
+    "underscore": "*"
   }
 }
