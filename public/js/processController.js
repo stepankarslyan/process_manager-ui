@@ -1,13 +1,11 @@
 angular.module("MyApp").
   controller("ProcessController", function($scope) {
   
-  $scope.isCollapsed = false;
-  
   $scope.process = {
     id: "",
     name: "",
     cmd: "",
-    params: ""
+    params: "[]"
   };
   
   $scope.processes = [];
@@ -17,59 +15,85 @@ angular.module("MyApp").
     method: "GET",
     
     success: function(data) {
-      console.log(data);
-      $scope.processes = data;
+      toastr.success("Get request succeded!");
+      $scope.processes = _.sortBy(data, function(process) {return process.id});
       $scope.$apply();
     }
     
   });
-
   
   $scope.save = function() {
-    var process = $scope.process;
-   // console.log(process);
-  
-    $.ajax({
-      url: "/processes",
-      method: "POST",
-      data: process,
-      
-      success: function() {      
-        console.log("Post request succeded");
-        $scope.processes.push(process);
-        $scope.$apply();
-      },
-      
-      error: function(data) {
-        $scope.alertText = data.responseText;   
-      }
     
-    });
-     
-    
+    var process = {
+      id: $scope.process.id,
+      name: $scope.process.name,
+      cmd: $scope.process.cmd,
+      params: JSON.parse($scope.process.params)
+    };
+      
+        $.ajax({
+          url: "/processes",
+          method: "POST",
+          data: process,
+          
+          success: function(data) {      
+            $scope.processes.push(process);
+            $scope.processes = _.sortBy($scope.processes, function(proc) {return proc.id});
+            toastr.success(data);
+            $scope.$apply();        
+          },
+          
+          error: function(error) {
+            toastr.error(error, "Fill the fields");
+            $scope.$apply();
+          }
+          
+        });
+      
   };
   
   $scope.delete = function(proc) {
+    
     $.ajax({
       url: "/processes/" + proc.id,
-      type: "DELETE",
+      method: "DELETE",
       
-      success: function(data) {
-        console.log(data);
-        $scope.processes = _.filter($scope.processes, function(process) {
-          return process === data;
-        } );
+      success: function() {
+        $scope.processes = _.reject($scope.processes, function(process) {
+          return process.id == proc.id;
           $scope.$apply();
+        });
+        toastr.success("Process was cuccessfuly deleted", "SUCCESS");
+        $scope.$apply();
       }, 
       
       error: function(error) {
-        console.log("Server internal error...");  
+        toastr.error(error.responseText, "ERROR");   
+        $scope.$apply();
       }
       
     });
     
-    
-
   };
+  
+  $scope.start = function(proc) {
+    
+    $.ajax({
+      url: "/processes/" + proc.id + "/starts",
+      method: "POST",
+      
+      success: function(data) {       
+        toastr.success("Process" + "[" +proc.id + "]" + " has started" + data);
+        $scope.$apply();
+      }, 
+      
+      error: function(error) {
+        toastr.error("Error happened");   
+        $scope.$apply();
+      }
+      
+    });
+    
+  }
     
 });

@@ -13,3 +13,5 @@ app.use(bodyParser());
 app.post("/processes", controller.save);
 app.get("/processes", controller.get);
 app.delete("/processes/:id", controller.delete);
+app.post("/processes/:id/starts", controller.start);
+

@@ -7,40 +7,55 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/underscore/underscore.js"></script>
+    <script src="lib/toastr/toastr.js"></script>
     <script src="lib/ui-bootstrap/src/collapse/collapse.js"></script>
     <script src="js/app.js"></script>
     <script src="js/processController.js"></script>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="lib/toastr/toastr.css"/>
   </head>
   <body ng-controller="ProcessController">
     <div class="container">
       <h1>Processes</h1>
       
-      <form class="well">
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">@</span>
-          <input type="text" ng-model="process.id" class="form-control" placeholder="Process id...">
-        </div>
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">@</span>
-          <input type="text" ng-model="process.cmd" class="form-control" placeholder="Process command...">
-        </div>
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">@</span>
-          <input type="text" ng-model="process.name" class="form-control" placeholder="Process name...">
-        </div>
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">@</span>
-          <input type="text" ng-model="process.params" class="form-control" placeholder="Process parameters...">
-        </div>
-        <div class="input-group input-group-sm">
-          <input ng-click="save()" type="button" class="btn btn-default" class="form-control" value="Send">
-          <input ng-click="get()" type="button" class="btn btn-default" class="form-control" value="GET">
-        </div>
-      </form>
-      <div class="alert alert-danger">{{alertText}}</div>
+      <form class="well">      
       
-      <table ng-repeat="proc in processes" class="table table-hover">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Id</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="process.id" class="form-control" placeholder="Process id...">
+          </div>
+        </div>
+          
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="process.name" class="form-control" placeholder="Process name...">
+          </div>
+        </div>
+        
+        <div class="form-group">  
+          <label class="col-sm-2 control-label">Command</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="process.cmd" class="form-control" placeholder="Process command...">
+          </div>
+        </div>
+        
+        <div class="form-group">            
+          <label class="col-sm-2 control-label">Parameters</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="process.params" class="form-control" placeholder="Process parameters...">
+          </div>                              
+        </div>
+        
+        <input ng-click="save()" type="button" class="btn btn-primary" value="Save">
+        
+      </form> 
+       
+      
+      <div class="alert alert-{{alert.type}}" ng-if="alert != null">{{alert.text}}</div>
+      
+      <table class="table table-hover">
         <tr class="danger">
           <td><b>Id</b></td>
           <td><b>Name</b></td>
@@ -49,12 +64,15 @@
           <td><b>Action</b></td>
         </tr>
         <hr>
-        <tr class="success">
+        <tr ng-repeat="proc in processes">
           <td>{{proc.id}}</td> 
           <td>{{proc.name}}</td>
           <td>{{proc.cmd}}</td>
           <td>{{proc.params}}</td>
-          <td><input type="button" class="btn btn-danger" value="Delete" ng-click="delete(proc)"/></td>
+          <td>
+            <input type="button" class="btn btn-danger btn-xs" value="Delete" ng-click="delete(proc)"/>
+            <input type="button" class="btn btn-success btn-xs" value="Start" ng-click="start(proc)"/>
+          </td>
         </tr>
       </table>
       

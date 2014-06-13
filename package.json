@@ -5,6 +5,8 @@
     "express": "*",
     "mongoose": "*",
     "body-parser": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "zmq": "onicollet/zmq",
+    "optimist":"*"
   }
 }
