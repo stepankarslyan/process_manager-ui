@@ -1,6 +1,6 @@
 var zmq = require("zmq");
 var requester = zmq.socket("asyncreq");
-requester.connect("tcp://localhost:5050");
+requester.connect("tcp://localhost:5555");
 
 module.exports = {
   

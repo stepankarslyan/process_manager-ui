@@ -5,7 +5,8 @@ angular.module("MyApp").
     id: "",
     name: "",
     cmd: "",
-    params: "[]"
+    params: "[]",
+    checkbox: false
   };
   
   $scope.processes = [];
@@ -28,7 +29,8 @@ angular.module("MyApp").
       id: $scope.process.id,
       name: $scope.process.name,
       cmd: $scope.process.cmd,
-      params: JSON.parse($scope.process.params)
+      params: JSON.parse($scope.process.params),
+      checkbox: $scope.process.checkbox
     };
       
         $.ajax({
@@ -52,7 +54,7 @@ angular.module("MyApp").
       
   };
   
-  $scope.delete = function(proc) {
+  $scope.remove = function(proc) {
     
     $.ajax({
       url: "/processes/" + proc.id,

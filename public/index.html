@@ -48,12 +48,16 @@
           </div>                              
         </div>
         
+        <div class="form-group">            
+          <label class="col-sm-2 control-label">Auto Start</label>
+          <div class="col-sm-10">
+            <input type="checkbox" ng-model="process.checkbox" class="form-control">
+          </div>                              
+        </div>
+        
         <input ng-click="save()" type="button" class="btn btn-primary" value="Save">
         
       </form> 
-       
-      
-      <div class="alert alert-{{alert.type}}" ng-if="alert != null">{{alert.text}}</div>
       
       <table class="table table-hover">
         <tr class="danger">
@@ -61,6 +65,7 @@
           <td><b>Name</b></td>
           <td><b>Command</b></td>
           <td><b>Parameters</b></td>
+          <td><b>Autostart</b></td>
           <td><b>Action</b></td>
         </tr>
         <hr>
@@ -69,8 +74,9 @@
           <td>{{proc.name}}</td>
           <td>{{proc.cmd}}</td>
           <td>{{proc.params}}</td>
+          <td>{{proc.checkbox}}</td>
           <td>
-            <input type="button" class="btn btn-danger btn-xs" value="Delete" ng-click="delete(proc)"/>
+            <input type="button" class="btn btn-danger btn-xs" value="Delete" ng-click="remove(proc)"/>
             <input type="button" class="btn btn-success btn-xs" value="Start" ng-click="start(proc)"/>
           </td>
         </tr>
