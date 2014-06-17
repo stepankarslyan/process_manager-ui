@@ -6,7 +6,7 @@ angular.module("MyApp").
     name: "",
     cmd: "",
     params: "[]",
-    checkbox: false
+    auto: false
   };
   
   $scope.processes = [];
@@ -30,7 +30,7 @@ angular.module("MyApp").
       name: $scope.process.name,
       cmd: $scope.process.cmd,
       params: JSON.parse($scope.process.params),
-      checkbox: $scope.process.checkbox
+      auto: $scope.process.auto
     };
       
         $.ajax({
